@@ -13,16 +13,23 @@ const playgroundDimension = Math.pow(10, 2);
 
 for (let i = 0; i < playgroundDimension; i++) {
   generateNumeratedCard(i, objectContainer);
-  console.log(i);
-}
+};
+
+const cardCreatedCustom = document.getElementsByClassName('card');
+
+cardCreatedCustom.addEventListener('click', activateCard);
+
 
 //creo una function che scriva numeri progressivi all'interno della card
-
-
 
 // function orderedNumerator(iterationCounter, createdObject) {
 //   createdObject.innerText = iterationCounter + 1;
 // }
+
+
+function activateCard() {
+  console.log(this);
+};
 
 function generateNumeratedCard(iterationCounter, objectContainer) {
 
