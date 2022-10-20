@@ -12,13 +12,23 @@ const playgroundDimension = Math.pow(10, 2);
 //dopo aver dichiarato il container voglio creare una funzione che generi delle caselle
 
 for (let i = 0; i < playgroundDimension; i++) {
-  generateCard(objectContainer);
+  generateNumeratedCard(i, objectContainer);
+  console.log(i);
 }
 
-function generateCard(objectContainer) {
+//creo una function che scriva numeri progressivi all'interno della card
+
+
+
+// function orderedNumerator(iterationCounter, createdObject) {
+//   createdObject.innerText = iterationCounter + 1;
+// }
+
+function generateNumeratedCard(iterationCounter, objectContainer) {
 
   const cardCreated = document.createElement('div');
   objectContainer.append(cardCreated);
   cardCreated.className = 'card';
+  cardCreated.innerText = `${iterationCounter + 1}`;
 
 }
