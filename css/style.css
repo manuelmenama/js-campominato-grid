@@ -1,3 +1,4 @@
+/* general */
 *,
 *::after,
 *::before{
@@ -10,6 +11,7 @@ body{
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
+/* header */
 header{
   height: 80px;
   display: flex;
@@ -27,6 +29,7 @@ button{
   padding: 0 25px;
 }
 
+/* main */
 .main-wrapper{
   height: calc(100vh - 140px);
   background-color: rgb(127, 255, 212);
@@ -57,6 +60,7 @@ button{
   background-color: rgb(127, 255, 212);
 }
 
+/* footer */
 footer{
   height: 60px;
 }

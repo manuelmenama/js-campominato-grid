@@ -6,52 +6,61 @@ console.log('Loaded "Campo Minato"');
 //4 creare bottone di start
 //5 creare un una select con tre livelli di difficoltà (1 - 100(10), 2 - 81(9), 3 - 49(7))
 
+
+//dichiaro i primi elementi con i quali interagirò
 const objectContainer = document.querySelector('.container');
 const playButton = document.querySelector('button');
-const gameDifficulty = playgroundChoose();
 
-const playgroundDimension = Math.pow(playgroundChoose(), 2);
-
-//dopo aver dichiarato il container voglio creare una funzione che generi delle caselle
-
+//al click del play button viene generato il campo da gioco
 playButton.addEventListener('click', playFunction);
 
 function playFunction() {
-  objectContainer.innerHTML = "";
+  //appena clicco viene eliminato tutto quello che c'era nel campo da gioco
+  objectContainer.innerHTML = '';
+  //sempre al click viene letto il value della difficoltà selezionata
+  let gameDifficulty = document.getElementById('game-changer').value;
+  console.log(gameDifficulty);
+  //calcolo la dimensione del campo da gioco che utilizzo come limite del contatore
+  const playgroundDimension = Math.pow(gameDifficulty, 2);
+  
+  //chiamo una funzione all'interno di un for che genererà tante caselle quante dice il contatore
   for (let i = 0; i < playgroundDimension; i++) {
-    generateNumeratedCard(i, objectContainer);
+    generateNumeratedCard(i, objectContainer, gameDifficulty);
   };
+
 }
 
-
-//creo una function che scriva numeri progressivi all'interno della card
-
-// function orderedNumerator(iterationCounter, createdObject) {
-//   createdObject.innerText = iterationCounter + 1;
-// }
-
-//creo una funzione che cambi la grandezza del playground
-function playgroundChoose(){
-  return document.getElementById('game-changer').value;
-}
-
-function generateNumeratedCard(iterationCounter, objectContainer) {
+/** la funzione crea la card e inserisce il numero
+ * 
+ * @param {number} iterationCounter 
+ * @param {object} objectContainer 
+ * @param {number} gameDifficulty 
+ */
+function generateNumeratedCard(iterationCounter, objectContainer, gameDifficulty) {
 
   const cardCreated = document.createElement('div');
   objectContainer.append(cardCreated);
   cardCreated.className = 'card';
   cardCreated.innerText = `${iterationCounter + 1}`;
-  cardCreated.style.width = generateCalcCss();
-  cardCreated.style.height = generateCalcCss();
+  cardCreated.style.width = generateCalcCss(gameDifficulty);
+  cardCreated.style.height = generateCalcCss(gameDifficulty);
+  //aggiungo un id custom incrementale a tutte le caselle
   cardCreated.idCard = iterationCounter + 1;
+  //allo scattare dell'evento appiccico una classe active alla casella
   cardCreated.addEventListener('click', activateCard);
-  
+}
+/** la funzione attende un valore numerico per dare dimensione alla card
+ * 
+ * @param {number} numberOfElem 
+ * @returns 
+ */
+function generateCalcCss(numberOfElem){
+  return `calc(100% / ${numberOfElem})`
 }
 
-function generateCalcCss(){
-  return `calc(100% / ${gameDifficulty})`
-}
-
+/**
+ * funzione che appiccica una classe active alle card
+ */
 function activateCard() {
   this.classList.add('active');
   console.log(this.idCard);
