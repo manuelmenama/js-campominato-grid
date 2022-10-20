@@ -7,17 +7,21 @@ console.log('Loaded "Campo Minato"');
 //5 creare un una select con tre livelli di difficoltà (1 - 100(10), 2 - 81(9), 3 - 49(7))
 
 const objectContainer = document.querySelector('.container');
-const playgroundDimension = Math.pow(10, 2);
+const playButton = document.querySelector('button');
+const gameDifficulty = playgroundChoose();
+
+const playgroundDimension = Math.pow(playgroundChoose(), 2);
 
 //dopo aver dichiarato il container voglio creare una funzione che generi delle caselle
 
-for (let i = 0; i < playgroundDimension; i++) {
-  generateNumeratedCard(i, objectContainer);
-};
+playButton.addEventListener('click', playFunction);
 
-const cardCreatedCustom = document.getElementsByClassName('card');
-
-cardCreatedCustom.addEventListener('click', activateCard);
+function playFunction() {
+  objectContainer.innerHTML = "";
+  for (let i = 0; i < playgroundDimension; i++) {
+    generateNumeratedCard(i, objectContainer);
+  };
+}
 
 
 //creo una function che scriva numeri progressivi all'interno della card
@@ -26,10 +30,10 @@ cardCreatedCustom.addEventListener('click', activateCard);
 //   createdObject.innerText = iterationCounter + 1;
 // }
 
-
-function activateCard() {
-  console.log(this);
-};
+//creo una funzione che cambi la grandezza del playground
+function playgroundChoose(){
+  return document.getElementById('game-changer').value;
+}
 
 function generateNumeratedCard(iterationCounter, objectContainer) {
 
@@ -37,5 +41,18 @@ function generateNumeratedCard(iterationCounter, objectContainer) {
   objectContainer.append(cardCreated);
   cardCreated.className = 'card';
   cardCreated.innerText = `${iterationCounter + 1}`;
-
+  cardCreated.style.width = generateCalcCss();
+  cardCreated.style.height = generateCalcCss();
+  cardCreated.idCard = iterationCounter + 1;
+  cardCreated.addEventListener('click', activateCard);
+  
 }
+
+function generateCalcCss(){
+  return `calc(100% / ${gameDifficulty})`
+}
+
+function activateCard() {
+  this.classList.add('active');
+  console.log(this.idCard);
+};
