@@ -16,7 +16,7 @@ playButton.addEventListener('click', playFunction);
 
 function playFunction() {
   //appena clicco viene eliminato tutto quello che c'era nel campo da gioco
-  objectContainer.innerHTML = '';
+  reset();
   //sempre al click viene letto il value della difficoltà selezionata
   let gameDifficulty = document.getElementById('game-changer').value;
   console.log(gameDifficulty);
@@ -30,6 +30,10 @@ function playFunction() {
 
 }
 
+function reset() {
+  objectContainer.innerHTML = '';
+}
+
 /** la funzione crea la card e inserisce il numero
  * 
  * @param {number} iterationCounter 
@@ -41,7 +45,7 @@ function generateNumeratedCard(iterationCounter, objectContainer, gameDifficulty
   const cardCreated = document.createElement('div');
   objectContainer.append(cardCreated);
   cardCreated.className = 'card';
-  cardCreated.innerText = `${iterationCounter + 1}`;
+  cardCreated.innerHTML = `<span>${iterationCounter + 1}</span>`;
   cardCreated.style.width = generateCalcCss(gameDifficulty);
   cardCreated.style.height = generateCalcCss(gameDifficulty);
   //aggiungo un id custom incrementale a tutte le caselle
@@ -49,6 +53,7 @@ function generateNumeratedCard(iterationCounter, objectContainer, gameDifficulty
   //allo scattare dell'evento appiccico una classe active alla casella
   cardCreated.addEventListener('click', activateCard);
 }
+
 /** la funzione attende un valore numerico per dare dimensione alla card
  * 
  * @param {number} numberOfElem 
